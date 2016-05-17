@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     Button a1,b1,c1,a2,b2,c2,a3,b3,c3,Refresh;
     Button[] bArray;
     boolean turn=true;//X=true;O=false
+    boolean isWinner = false;
     int turn_count=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +36,13 @@ public class MainActivity extends AppCompatActivity {
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(turn_count%2 != 0)
-                        Toast.makeText(getApplicationContext(),"X turn",Toast.LENGTH_SHORT).show();
-                    else
-                        Toast.makeText(getApplicationContext(),"O turn",Toast.LENGTH_SHORT).show();
-
+                    if(!isWinner)
+                    {
+                        if (turn_count % 2 != 0)
+                            Toast.makeText(getApplicationContext(), "X turn", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(getApplicationContext(), "O turn", Toast.LENGTH_SHORT).show();
+                    }
                     if(turn)
                     {
                         b.setText("X");
@@ -83,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void check_winner()
     {
-        boolean isWinner = false;
+
         //Horizontal Check
         if(a1.getText() == a2.getText() && a2.getText() == a3.getText() && !a1.isClickable())
             isWinner=true;
